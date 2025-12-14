@@ -31,14 +31,14 @@ public class Day2
 
                 if (aStr.Substring(0, halfLength) == aStr.Substring(halfLength, halfLength))
                     result += a;
-                
+
                 a++;
             }
         }
-        
+
         Console.WriteLine(result);
     }
-    
+
     public void RunTwo()
     {
         var result = new List<long>();
@@ -69,13 +69,11 @@ public class Day2
                     var ok = true;
 
                     for (var j = step; j < len; j += step)
-                    {
                         if (s.Substring(j, step) != pattern)
                         {
                             ok = false;
                             break;
                         }
-                    }
 
                     if (ok)
                         result.Add(a);
@@ -84,7 +82,7 @@ public class Day2
                 a++;
             }
         }
-        
+
         Console.WriteLine(result.Distinct().Sum());
     }
 }

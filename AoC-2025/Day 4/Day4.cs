@@ -19,37 +19,32 @@ public class Day4
         foreach (var line in lines)
         {
             var row = new List<int>();
-            foreach (var ch in line)
-            {
-                row.Add(ch == '@' ? 1 : 0);
-            }
+            foreach (var ch in line) row.Add(ch == '@' ? 1 : 0);
             paperArr.Add(row);
         }
 
         for (var i = 0; i < paperArr.Count; i++)
+        for (var j = 0; j < paperArr[i].Count; j++)
         {
-            for (var j = 0; j < paperArr[i].Count; j++)
-            {
-                var pCount = 0;
-        
-                if (paperArr[i][j] != 1) continue;
-        
-                if (i > 0 && j > 0) pCount += paperArr[i-1][j-1];
-                if (i > 0) pCount += paperArr[i-1][j];
-                if (i > 0 && j < paperArr[i].Count - 1) pCount += paperArr[i-1][j+1];
-                if (j > 0) pCount += paperArr[i][j-1];
-                if (j < paperArr[i].Count - 1) pCount += paperArr[i][j+1];
-                if (i < paperArr.Count - 1 && j > 0) pCount += paperArr[i+1][j-1];
-                if (i < paperArr.Count - 1) pCount += paperArr[i+1][j];
-                if (i < paperArr.Count - 1 && j < paperArr[i].Count - 1) pCount += paperArr[i+1][j+1];
+            var pCount = 0;
 
-                if (pCount < 4) result++;
-            }
+            if (paperArr[i][j] != 1) continue;
+
+            if (i > 0 && j > 0) pCount += paperArr[i - 1][j - 1];
+            if (i > 0) pCount += paperArr[i - 1][j];
+            if (i > 0 && j < paperArr[i].Count - 1) pCount += paperArr[i - 1][j + 1];
+            if (j > 0) pCount += paperArr[i][j - 1];
+            if (j < paperArr[i].Count - 1) pCount += paperArr[i][j + 1];
+            if (i < paperArr.Count - 1 && j > 0) pCount += paperArr[i + 1][j - 1];
+            if (i < paperArr.Count - 1) pCount += paperArr[i + 1][j];
+            if (i < paperArr.Count - 1 && j < paperArr[i].Count - 1) pCount += paperArr[i + 1][j + 1];
+
+            if (pCount < 4) result++;
         }
-        
+
         Console.WriteLine(result);
     }
-    
+
     public void RunTwo()
     {
         var result = 0;
@@ -65,10 +60,7 @@ public class Day4
         foreach (var line in lines)
         {
             var row = new List<int>();
-            foreach (var ch in line)
-            {
-                row.Add(ch == '@' ? 1 : 0);
-            }
+            foreach (var ch in line) row.Add(ch == '@' ? 1 : 0);
             paperArr.Add(row);
         }
 
@@ -76,27 +68,25 @@ public class Day4
         {
             var allCount = 0;
             for (var i = 0; i < paperArr.Count; i++)
+            for (var j = 0; j < paperArr[i].Count; j++)
             {
-                for (var j = 0; j < paperArr[i].Count; j++)
+                var pCount = 0;
+
+                if (paperArr[i][j] != 1) continue;
+
+                if (i > 0 && j > 0) pCount += paperArr[i - 1][j - 1];
+                if (i > 0) pCount += paperArr[i - 1][j];
+                if (i > 0 && j < paperArr[i].Count - 1) pCount += paperArr[i - 1][j + 1];
+                if (j > 0) pCount += paperArr[i][j - 1];
+                if (j < paperArr[i].Count - 1) pCount += paperArr[i][j + 1];
+                if (i < paperArr.Count - 1 && j > 0) pCount += paperArr[i + 1][j - 1];
+                if (i < paperArr.Count - 1) pCount += paperArr[i + 1][j];
+                if (i < paperArr.Count - 1 && j < paperArr[i].Count - 1) pCount += paperArr[i + 1][j + 1];
+
+                if (pCount < 4)
                 {
-                    var pCount = 0;
-
-                    if (paperArr[i][j] != 1) continue;
-
-                    if (i > 0 && j > 0) pCount += paperArr[i - 1][j - 1];
-                    if (i > 0) pCount += paperArr[i - 1][j];
-                    if (i > 0 && j < paperArr[i].Count - 1) pCount += paperArr[i - 1][j + 1];
-                    if (j > 0) pCount += paperArr[i][j - 1];
-                    if (j < paperArr[i].Count - 1) pCount += paperArr[i][j + 1];
-                    if (i < paperArr.Count - 1 && j > 0) pCount += paperArr[i + 1][j - 1];
-                    if (i < paperArr.Count - 1) pCount += paperArr[i + 1][j];
-                    if (i < paperArr.Count - 1 && j < paperArr[i].Count - 1) pCount += paperArr[i + 1][j + 1];
-
-                    if (pCount < 4)
-                    {
-                        allCount++;
-                        paperArr[i][j] = 0;
-                    }
+                    allCount++;
+                    paperArr[i][j] = 0;
                 }
             }
 

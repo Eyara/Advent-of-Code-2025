@@ -18,7 +18,7 @@ public class Day3
         {
             var highest = -1;
             var secondHighest = -1;
-            
+
             for (var i = 0; i < line.Length; i++)
             {
                 var val = Convert.ToInt32(line[i].ToString());
@@ -36,10 +36,10 @@ public class Day3
 
             result += 10 * highest + secondHighest;
         }
-        
+
         Console.WriteLine(result);
     }
-    
+
     public void RunTwo()
     {
         var result = (long)0;
@@ -61,13 +61,14 @@ public class Day3
             {
                 var maxVal = line.Substring(lastOccurIdx + 1, l - lastOccurIdx - (n - resultStr.Length)).Max();
                 resultStr += maxVal;
-                lastOccurIdx = line.IndexOf(maxVal, lastOccurIdx + 1);;
+                lastOccurIdx = line.IndexOf(maxVal, lastOccurIdx + 1);
+                ;
             }
 
             result += Convert.ToInt64(resultStr);
             Console.WriteLine(Convert.ToInt64(resultStr));
         }
-        
+
         Console.WriteLine(result);
     }
 }
