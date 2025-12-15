@@ -18,17 +18,12 @@ public class Day6
                 .Parent!.FullName, "Day 6", Constants.INPUT_PATH));
 
         for (var i = 0; i < lines.Length; i++)
-        {
             if (i < lines.Length - 1)
-            {
-                nums.Add(lines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => Convert.ToInt64(x.Trim())).ToList());
-            }
+                nums.Add(lines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => Convert.ToInt64(x.Trim())).ToList());
             else
-            {
                 operations = lines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
-            }
-        }
-        
+
         var columnCount = nums[0].Count;
 
         for (var col = 0; col < columnCount; col++)
@@ -36,9 +31,8 @@ public class Day6
             var columnValues = nums.Select(row => row[col]).ToList();
             var operation = operations[col];
             var colResult = operation == "+" ? (long)0 : 1;
-    
+
             for (var i = 0; i < columnValues.Count; i++)
-            {
                 switch (operation)
                 {
                     case "+":
@@ -48,10 +42,10 @@ public class Day6
                         colResult *= columnValues[i];
                         break;
                 }
-            }
+
             result += colResult;
         }
-        
+
         Console.WriteLine(result);
     }
 
@@ -71,19 +65,19 @@ public class Day6
                 .Parent!.FullName, "Day 6", Constants.INPUT_PATH));
 
         for (var i = 0; i < lines.Length; i++)
-        {
             if (i < lines.Length - 1)
             {
                 var currentLine = lines[i];
                 rows.Add(currentLine);
-                nums.Add(currentLine.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => Convert.ToInt64(x.Trim())).ToList());
+                nums.Add(currentLine.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => Convert.ToInt64(x.Trim())).ToList());
             }
             else
             {
-                operations = lines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()).ToList();
+                operations = lines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim())
+                    .ToList();
             }
-        }
-        
+
         var columnCount = nums[0].Count;
 
         var startIdx = 0;
@@ -91,10 +85,7 @@ public class Day6
         {
             var columnMaxLength = nums.Select(row => row[col].ToString()).MaxBy(row => row.Length).Length;
             var tmpList = new List<string>();
-            foreach (var row in rows)
-            {
-                tmpList.Add(row.Substring(startIdx, columnMaxLength));
-            }
+            foreach (var row in rows) tmpList.Add(row.Substring(startIdx, columnMaxLength));
             numParsedStrings.Add(tmpList);
             startIdx += columnMaxLength + 1;
         }
@@ -107,7 +98,6 @@ public class Day6
             var groupedNumbers = GetColumnGroupedNumbers(numParsedStrings[i]);
 
             foreach (var number in groupedNumbers)
-            {
                 switch (operation)
                 {
                     case "+":
@@ -117,14 +107,13 @@ public class Day6
                         colResult *= number;
                         break;
                 }
-            }
-            
+
             result += colResult;
         }
-        
+
         Console.WriteLine(result);
     }
-    
+
     private static List<long> GetColumnGroupedNumbers(List<string> strings)
     {
         if (strings == null || strings.Count == 0)
@@ -133,34 +122,22 @@ public class Day6
         long maxLength = strings.Max(s => s.Length);
 
         var resultBuilders = new StringBuilder[maxLength];
-        for (var i = 0; i < maxLength; i++)
-        {
-            resultBuilders[i] = new StringBuilder();
-        }
+        for (var i = 0; i < maxLength; i++) resultBuilders[i] = new StringBuilder();
 
         foreach (var current in strings)
-        {
             for (var col = 0; col < current.Length; col++)
             {
                 var ch = current[col];
-                if (char.IsDigit(ch))
-                {
-                    resultBuilders[col].Append(ch);
-                }
+                if (char.IsDigit(ch)) resultBuilders[col].Append(ch);
             }
-        }
 
         var result = new List<long>();
         foreach (var builder in resultBuilders)
         {
             var combinedDigits = builder.ToString();
             if (!string.IsNullOrEmpty(combinedDigits))
-            {
                 if (long.TryParse(combinedDigits, out var number))
-                {
                     result.Add(number);
-                }
-            }
         }
 
         return result;

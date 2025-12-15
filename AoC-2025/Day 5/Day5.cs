@@ -81,20 +81,14 @@ public class Day5
 
             while (i + 1 < ranges.Count && ranges[i + 1].Item1 <= currentEnd)
             {
-                if (ranges[i + 1].Item2 > currentEnd)
-                {
-                    currentEnd = ranges[i + 1].Item2;
-                }
+                if (ranges[i + 1].Item2 > currentEnd) currentEnd = ranges[i + 1].Item2;
                 i++;
             }
 
             mergedRanges.Add((currentStart, currentEnd));
         }
 
-        foreach (var mergedRange in mergedRanges)
-        {
-            result += mergedRange.Item2 - mergedRange.Item1 + 1;
-        }
+        foreach (var mergedRange in mergedRanges) result += mergedRange.Item2 - mergedRange.Item1 + 1;
 
         Console.WriteLine(result);
     }
