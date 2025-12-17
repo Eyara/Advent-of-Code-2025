@@ -27,14 +27,8 @@ public class Day7
                 var occur = idxs.IndexOf(beams[j]);
                 if (occur >= 0)
                 {
-                    if (val > 0)
-                    {
-                        newBeams.Add(val - 1);
-                    }
-                    if (val < lines[i].Length - 1)
-                    {
-                        newBeams.Add(val + 1);
-                    }
+                    if (val > 0) newBeams.Add(val - 1);
+                    if (val < lines[i].Length - 1) newBeams.Add(val + 1);
 
                     result++;
                     continue;
@@ -46,7 +40,7 @@ public class Day7
             newBeams.Sort();
             beams = newBeams.Distinct().ToList();
         }
-        
+
         Console.WriteLine(result);
     }
 
@@ -68,7 +62,6 @@ public class Day7
             var nextBeams = new Dictionary<int, long>();
 
             foreach (var (pos, count) in beams)
-            {
                 if (idxs.Contains(pos))
                 {
                     if (pos > 0)
@@ -81,12 +74,11 @@ public class Day7
                 {
                     nextBeams[pos] = nextBeams.GetValueOrDefault(pos) + count;
                 }
-            }
 
             beams = nextBeams;
         }
 
-        long result = beams.Values.Sum();
+        var result = beams.Values.Sum();
         Console.WriteLine(result);
     }
 
