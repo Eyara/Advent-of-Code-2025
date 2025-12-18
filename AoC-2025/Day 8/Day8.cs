@@ -162,7 +162,7 @@ public class Day8
             var rootA = Find(parent, indexA);
             var rootB = Find(parent, indexB);
 
-            if (rootA != rootB) 
+            if (rootA != rootB)
             {
                 Union(parent, rank, indexA, indexB);
                 connectionsMade++;
